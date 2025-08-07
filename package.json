@@ -1,0 +1,40 @@
+{
+  "name": "pdf-to-image-converter",
+  "version": "1.0.0",
+  "description": "Advanced PDF to PNG/JPEG converter tool that runs in the browser",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "serve": "npx http-server -p 8000 -o",
+    "test": "echo \"Open index.html in a web browser to test the application\""
+  },
+  "keywords": [
+    "pdf",
+    "converter",
+    "image",
+    "png",
+    "jpeg",
+    "browser",
+    "client-side",
+    "pdf.js"
+  ],
+  "author": "PDF to Image Converter",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "."
+  },
+  "homepage": ".",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "> 1%",
+    "not dead"
+  ]
+}

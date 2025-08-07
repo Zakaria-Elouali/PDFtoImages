@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI File Assistant - File Converter Suite</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/ai-assistant.css">
+</head>
+<body class="ai-assistant-body">
+    <!-- Header -->
+    <header class="ai-header">
+        <div class="ai-header-content">
+            <div class="ai-header-left">
+                <a href="../index.html" class="back-link">
+                    <span class="back-icon">←</span>
+                    <span>Back to Home</span>
+                </a>
+                <div class="ai-title">
+                    <div class="ai-icon">🤖</div>
+                    <h1>AI File Assistant</h1>
+                </div>
+            </div>
+            <div class="ai-header-right">
+                <button class="new-chat-btn" id="newChatBtn">
+                    <span>+</span>
+                    New Chat
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Chat Interface -->
+    <main class="ai-main">
+        <div class="chat-container">
+            <!-- Welcome Message -->
+            <div class="welcome-section" id="welcomeSection">
+                <div class="welcome-content">
+                    <div class="ai-avatar">
+                        <div class="ai-icon-large">🤖</div>
+                    </div>
+                    <p>I'm your AI file assistant. I can help you convert, process, and analyze your files with simple conversation.</p>
+
+                    <div class="quick-actions">
+                        <button class="quick-action-btn" data-action="upload">
+                            📁 Upload Files to Get Started
+                        </button>
+                        <button class="quick-action-btn" data-action="examples">
+                            💡 See Examples
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Messages -->
+            <div class="chat-messages" id="chatMessages">
+                <!-- Messages will be added here dynamically -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Input Area - Fixed at bottom -->
+    <div class="input-area">
+        <div class="input-container">
+            <!-- Upload button outside input -->
+            <div class="upload-section">
+                <button class="attach-btn" id="attachBtn" title="Attach files">
+                    📎 Upload Files
+                </button>
+            </div>
+
+            <div class="input-wrapper">
+                <textarea
+                    id="messageInput"
+                    placeholder="Message AI Assistant..."
+                    rows="1"
+                ></textarea>
+                <button class="send-btn" id="sendBtn" disabled>
+                    <span class="send-icon">→</span>
+                </button>
+            </div>
+            <div class="quick-suggestions">
+                <button class="suggestion-btn" data-suggestion="Convert PDF to images">Convert PDF to images</button>
+                <button class="suggestion-btn" data-suggestion="Create PDF from images">Create PDF from images</button>
+                <button class="suggestion-btn" data-suggestion="Remove image backgrounds">Remove image backgrounds</button>
+                <button class="suggestion-btn" data-suggestion="Analyze document content">Analyze document content</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- File Upload Modal -->
+    <div class="upload-modal" id="uploadModal">
+        <div class="upload-modal-content">
+            <div class="upload-modal-header">
+                <h3>Upload Files</h3>
+                <button class="close-modal" id="closeModal">×</button>
+            </div>
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-icon">📁</div>
+                <p>Drag and drop files here or click to browse</p>
+                <input type="file" id="fileInput" multiple accept=".pdf,.jpg,.jpeg,.png,.gif,.bmp,.tiff,.webp">
+                <button class="browse-btn" onclick="document.getElementById('fileInput').click()">Browse Files</button>
+            </div>
+            <div class="uploaded-files" id="uploadedFiles">
+                <!-- Uploaded files will appear here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/ai-assistant.js"></script>
+</body>
+</html>

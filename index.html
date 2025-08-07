@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Converter Suite - PDF, Images & More</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="assets/js/api-service.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <h1>🔄 File Converter Suite</h1>
+                <div class="user-section">
+                    <div id="userInfo" class="user-info hidden">
+                        <span id="userName">User</span>
+                        <span id="userUsage" class="usage-info">0/10 conversions</span>
+                        <button id="upgradeBtn" class="upgrade-btn">⭐ Upgrade</button>
+                        <button id="logoutBtn" class="logout-btn">🚪 Logout</button>
+                    </div>
+                    <div id="authButtons" class="auth-buttons">
+                        <button id="loginBtn" class="auth-btn">🔑 Login</button>
+                        <button id="signupBtn" class="auth-btn signup">🚀 Sign Up</button>
+                    </div>
+                </div>
+            </div>
+            <p>Convert PDFs to images, images to PDFs, and more - all in your browser</p>
+
+            <!-- Conversion Mode Selector -->
+            <div class="mode-selector">
+                <button class="mode-btn active" data-mode="pdf-to-images">
+                    📄➡️🖼️ PDF to Images
+                </button>
+                <button class="mode-btn" data-mode="images-to-pdf">
+                    🖼️➡️📄 Images to PDF
+                </button>
+                <button class="mode-btn" data-mode="image-tools">
+                    🎨 Image Tools
+                </button>
+                <button class="mode-btn" data-mode="pdf-tools">
+                    📋 PDF Tools
+                </button>
+                <a href="pages/ai-assistant.html" class="mode-btn ai-mode">
+                    🤖 AI Assistant
+                </a>
+            </div>
+        </header>
+
+
+
+        <main>
+            <!-- File Upload Section -->
+            <section class="upload-section">
+                <!-- PDF to Images Mode -->
+                <div class="conversion-mode" id="pdf-to-images-mode">
+                    <div class="drop-zone" id="pdfDropZone">
+                        <div class="drop-zone-content">
+                            <div class="upload-icon">📁</div>
+                            <h3>Drag & Drop PDF Files Here</h3>
+                            <p>or click to select files</p>
+                            <input type="file" id="pdfFileInput" multiple accept=".pdf" hidden>
+                            <button class="select-btn" onclick="document.getElementById('pdfFileInput').click()">
+                                Select PDF Files
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Images to PDF Mode -->
+                <div class="conversion-mode hidden" id="images-to-pdf-mode">
+                    <div class="drop-zone" id="imageDropZone">
+                        <div class="drop-zone-content">
+                            <div class="upload-icon">🖼️</div>
+                            <h3>Drag & Drop Images Here</h3>
+                            <p>Select multiple images to create a PDF</p>
+                            <input type="file" id="imageFileInput" multiple accept="image/*" hidden>
+                            <button class="select-btn" onclick="document.getElementById('imageFileInput').click()">
+                                Select Images
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image Tools Mode -->
+                <div class="conversion-mode hidden" id="image-tools-mode">
+                    <div class="drop-zone" id="imageToolsDropZone">
+                        <div class="drop-zone-content">
+                            <div class="upload-icon">🎨</div>
+                            <h3>Upload Images for Processing</h3>
+                            <p>Resize, compress, or convert image formats</p>
+                            <input type="file" id="imageToolsInput" multiple accept="image/*" hidden>
+                            <button class="select-btn" onclick="document.getElementById('imageToolsInput').click()">
+                                Select Images
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PDF Tools Mode -->
+                <div class="conversion-mode hidden" id="pdf-tools-mode">
+                    <div class="drop-zone" id="pdfToolsDropZone">
+                        <div class="drop-zone-content">
+                            <div class="upload-icon">📋</div>
+                            <h3>Upload PDFs for Processing</h3>
+                            <p>Merge, split, or compress PDF files</p>
+                            <input type="file" id="pdfToolsInput" multiple accept=".pdf" hidden>
+                            <button class="select-btn" onclick="document.getElementById('pdfToolsInput').click()">
+                                Select PDF Files
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Agent Mode - Redirect to dedicated page -->
+                <div class="conversion-mode hidden" id="ai-agent-mode">
+                    <div class="ai-redirect-container">
+                        <div class="ai-redirect-content">
+                            <div class="ai-redirect-icon">🤖</div>
+                            <h3>AI File Assistant</h3>
+                            <p>Experience our powerful AI assistant on a dedicated page designed for the best conversational experience.</p>
+                            <a href="pages/ai-assistant.html" class="ai-redirect-btn">
+                                <span>🚀 Open AI Assistant</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- User Dashboard (shown when logged in) -->
+            <section class="dashboard-section hidden" id="dashboardSection">
+                <h3>📊 Your Dashboard</h3>
+                <div class="dashboard-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">🔄</div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="totalConversions">0</div>
+                            <div class="stat-label">Total Conversions</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📅</div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="monthlyConversions">0</div>
+                            <div class="stat-label">This Month</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="planType">Free</div>
+                            <div class="stat-label">Current Plan</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📈</div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="remainingConversions">10</div>
+                            <div class="stat-label">Remaining</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Conversion Options -->
+            <section class="options-section" id="optionsSection" style="display: none;">
+                <h3>Conversion Options</h3>
+                <div class="options-grid">
+                    <div class="option-group">
+                        <label for="outputFormat">Output Format:</label>
+                        <select id="outputFormat">
+                            <option value="png">PNG (Lossless)</option>
+                            <option value="jpeg">JPEG (Compressed)</option>
+                        </select>
+                    </div>
+
+                    <div class="option-group">
+                        <label for="imageQuality">Image Quality:</label>
+                        <select id="imageQuality">
+                            <option value="1">Low (1x - Fast)</option>
+                            <option value="1.5">Medium (1.5x)</option>
+                            <option value="2" selected>High (2x - Recommended)</option>
+                            <option value="3">Very High (3x)</option>
+                            <option value="4">Ultra (4x - Slow)</option>
+                        </select>
+                    </div>
+
+                    <div class="option-group">
+                        <label for="jpegQuality">JPEG Quality:</label>
+                        <input type="range" id="jpegQuality" min="0.1" max="1" step="0.1" value="0.9">
+                        <span id="jpegQualityValue">90%</span>
+                    </div>
+
+                    <div class="option-group">
+                        <label for="pageRange">Pages to Convert:</label>
+                        <select id="pageRange">
+                            <option value="all">All Pages</option>
+                            <option value="first">First Page Only</option>
+                            <option value="custom">Custom Range</option>
+                        </select>
+                    </div>
+
+                    <div class="option-group" id="customRangeGroup" style="display: none;">
+                        <label for="customPages">Page Range (e.g., 1-3, 5, 7-9):</label>
+                        <input type="text" id="customPages" placeholder="1-3, 5, 7-9">
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="convertBtn" class="convert-btn">
+                        🔄 Convert to Images
+                    </button>
+                    <button id="clearBtn" class="clear-btn">
+                        🗑️ Clear All
+                    </button>
+                </div>
+            </section>
+
+            <!-- File List -->
+            <section class="files-section" id="filesSection" style="display: none;">
+                <h3>Selected Files</h3>
+                <div id="filesList" class="files-list"></div>
+            </section>
+
+            <!-- Progress Section -->
+            <section class="progress-section" id="progressSection" style="display: none;">
+                <h3>Conversion Progress</h3>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text" id="progressText">0%</div>
+                </div>
+                <div id="progressDetails" class="progress-details"></div>
+            </section>
+
+
+
+            <!-- Results Section -->
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <h3>Converted Images</h3>
+                <div class="results-actions">
+                    <button id="downloadAllBtn" class="download-all-btn">
+                        📦 Download All Images
+                    </button>
+                    <p style="font-size: 0.9rem; color: #666; margin-top: 10px;">
+                        Downloads all images individually or as an HTML page with embedded images
+                    </p>
+                </div>
+                <div id="resultsList" class="results-list"></div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Built with PDF.js • Client-side processing • No data uploaded to servers</p>
+        </footer>
+    </div>
+
+    <!-- Authentication Modal -->
+    <div id="authModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+
+            <!-- Login Form -->
+            <div id="loginForm" class="auth-form">
+                <h2>🔑 Login to Your Account</h2>
+                <form id="loginFormElement">
+                    <div class="form-group">
+                        <label for="loginEmail">Email:</label>
+                        <input type="email" id="loginEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password:</label>
+                        <input type="password" id="loginPassword" required>
+                    </div>
+                    <button type="submit" class="auth-submit-btn">Login</button>
+                </form>
+                <div class="demo-credentials">
+                    <p><strong>Demo Accounts:</strong></p>
+                    <p>Free: demo@example.com / demo123</p>
+                    <p>Pro: pro@example.com / pro123</p>
+                </div>
+                <p class="auth-switch">
+                    Don't have an account?
+                    <a href="#" id="showSignup">Sign up here</a>
+                </p>
+            </div>
+
+            <!-- Signup Form -->
+            <div id="signupForm" class="auth-form hidden">
+                <h2>🚀 Create Your Account</h2>
+                <form id="signupFormElement">
+                    <div class="form-group">
+                        <label for="signupName">Name:</label>
+                        <input type="text" id="signupName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupEmail">Email:</label>
+                        <input type="email" id="signupEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupPassword">Password:</label>
+                        <input type="password" id="signupPassword" required>
+                    </div>
+                    <button type="submit" class="auth-submit-btn">Create Account</button>
+                </form>
+                <p class="auth-switch">
+                    Already have an account?
+                    <a href="#" id="showLogin">Login here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upgrade Modal -->
+    <div id="upgradeModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close" id="closeUpgradeModal">&times;</span>
+            <h2>⭐ Upgrade Your Plan</h2>
+
+            <div class="pricing-plans">
+                <div class="plan">
+                    <h3>Free</h3>
+                    <div class="price">$0<span>/month</span></div>
+                    <ul>
+                        <li>10 conversions/month</li>
+                        <li>5MB max file size</li>
+                        <li>Basic formats</li>
+                    </ul>
+                    <button class="plan-btn current">Current Plan</button>
+                </div>
+
+                <div class="plan featured">
+                    <h3>Pro</h3>
+                    <div class="price">$9.99<span>/month</span></div>
+                    <ul>
+                        <li>100 conversions/month</li>
+                        <li>50MB max file size</li>
+                        <li>All formats + OCR</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <button class="plan-btn" id="upgradeToPro">Upgrade Now</button>
+                </div>
+
+                <div class="plan">
+                    <h3>Enterprise</h3>
+                    <div class="price">$49.99<span>/month</span></div>
+                    <ul>
+                        <li>Unlimited conversions</li>
+                        <li>500MB max file size</li>
+                        <li>API access</li>
+                        <li>Team management</li>
+                    </ul>
+                    <button class="plan-btn" id="upgradeToEnterprise">Contact Sales</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include JSZip for creating ZIP files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <!-- Include jsPDF for creating PDF files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
