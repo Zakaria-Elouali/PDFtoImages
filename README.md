@@ -84,7 +84,7 @@ cp backend/.env.example backend/.env
 nano backend/.env
 
 # 3. Set up database (optional)
-createdb converter_db
+createdb file_converter_saas
 
 # 4. Add AI API keys (optional)
 # OPENAI_API_KEY=sk-your_key_here
@@ -376,14 +376,6 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ---
 
-## 📞 Support & Contact
-
-- **📧 Email**: support@pdftoimage.com
-- **🐛 Issues**: [GitHub Issues](../../issues)
-- **💬 Discussions**: [GitHub Discussions](../../discussions)
-- **📖 Documentation**: [Wiki](../../wiki)
-
----
 
 <div align="center">
 
