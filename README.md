@@ -125,23 +125,7 @@ python -m http.server 8000
 - Monitor real-time progress
 - Download individual images or **"📦 Download All"** as ZIP
 
-## 🎮 Demo Accounts
 
-Try the SaaS features with these demo accounts:
-
-| Account Type | Email | Password | Features |
-|--------------|-------|----------|----------|
-| **Free** | demo@example.com | demo123 | 10 conversions/month, 5MB limit |
-| **Pro** | pro@example.com | pro123 | 100 conversions/month, 50MB limit |
-
-### Demo Features:
-- ✅ User authentication and dashboard
-- ✅ Usage tracking and limits
-- ✅ Multiple conversion modes
-- ✅ Upgrade prompts and pricing
-- ✅ Responsive design
-
----
 
 ## ⚙️ Configuration Guide
 
@@ -192,24 +176,6 @@ Try the SaaS features with these demo accounts:
 | **HTML5 Canvas** | Native | Image rendering and conversion |
 | **JSZip** | 3.10.1 | ZIP file creation and compression |
 | **JavaScript** | ES6+ | Modern async/await processing |
-
-### 🌐 **Browser Compatibility**
-| Browser | Minimum Version | Status |
-|---------|----------------|--------|
-| **Chrome** | 60+ | ✅ Fully Supported |
-| **Firefox** | 55+ | ✅ Fully Supported |
-| **Safari** | 12+ | ✅ Fully Supported |
-| **Edge** | 79+ | ✅ Fully Supported |
-| **Mobile Safari** | 12+ | ✅ Responsive Design |
-| **Chrome Mobile** | 60+ | ✅ Touch Optimized |
-
-### ⚡ **Performance Metrics**
-| Metric | Specification | Notes |
-|--------|---------------|-------|
-| **Max File Size** | 500MB | Browser memory dependent |
-| **Processing Speed** | ~2-5 pages/sec | Quality dependent |
-| **Memory Usage** | 2-8x PDF size | Varies by quality setting |
-| **Concurrent Files** | 10+ | Limited by available RAM |
 
 ### 📁 **Project Structure**
 ```
@@ -304,41 +270,9 @@ case 'bmp':
 
 ---
 
-## � SaaS Potential & Monetization
-
-### 💼 **Potential SaaS Features**
-- **👤 User Accounts**: Registration, login, conversion history
-- **☁️ Cloud Storage**: Save to Google Drive, Dropbox, OneDrive
-- **🔗 API Access**: RESTful API for developers and integrations
-- **📊 Analytics**: Usage statistics and conversion metrics
-- **🎨 Advanced Features**: OCR, watermarks, batch processing
-- **💳 Pricing Tiers**: Free, Pro, Enterprise plans
-
-### 📈 **Monetization Strategy**
-| Tier | Price | Features | Limits |
-|------|-------|----------|--------|
-| **Free** | $0/month | Basic conversion | 10 files/month, 5MB max |
-| **Pro** | $9.99/month | Advanced features | 100 files/month, 50MB max |
-| **Enterprise** | $49.99/month | Full API access | Unlimited, 500MB max |
-
----
-
 ## 🤝 Contributing
 
 We welcome contributions! Here's how you can help:
-
-### 🐛 **Bug Reports**
-1. Check existing [issues](../../issues)
-2. Create detailed bug report with:
-   - Browser version
-   - PDF file details
-   - Steps to reproduce
-   - Console errors
-
-### 💡 **Feature Requests**
-1. Search existing [feature requests](../../issues?q=is%3Aissue+label%3Aenhancement)
-2. Describe the feature and use case
-3. Include mockups if applicable
 
 ### 🔧 **Development Setup**
 ```bash
